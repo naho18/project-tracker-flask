@@ -37,12 +37,6 @@ def get_student():
 
     return html
 
-@app.route('/test')
-def test(github):
-	github = 'jhacks'
-	first, last, github = hackbright.get_student_by_github(github)
-	lst = hackbright.get_grades_by_github(github)
-	print "hello"
 
 @app.route("/student-search")
 def get_student_form():
@@ -50,6 +44,25 @@ def get_student_form():
 
     return render_template("student_search.html")
 
+
+@app.route('/get-title')
+def get_project_title():
+	"""Form to get project title"""
+
+	return render_template("project_title_search.html")
+
+
+@app.route('/project')
+def project_listing():
+	title = request.args.get('title')
+
+	title, description, grade = hackbright.get_project_by_title(title)
+
+	html = render_template("project_listing.html",
+							title=title,
+							description=description,
+							grade=grade)
+	return html
 
 @app.route("/student-add-form")
 def student_creation():
