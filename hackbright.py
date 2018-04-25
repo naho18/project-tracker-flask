@@ -134,6 +134,7 @@ def get_grades_by_github(github):
         print "Student {acct} received grade of {grade} for {title}".format(
             acct=github, grade=row[1], title=row[0])
 
+    print rows
     return rows
 
 

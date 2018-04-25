@@ -14,15 +14,35 @@ def get_student():
     """Show information about a student."""
 
     github = request.args.get('github')
+    print github
 
     first, last, github = hackbright.get_student_by_github(github)
+    title_grade = hackbright.get_grades_by_github(github)
+
+
+	# first, last, github = hackbright.get_student_by_github(github)
+	# lst = hackbright.get_grades_by_github(github)
+
+    # first, last, github = hackbright.get_student_by_github(github)
+
+	
+	# lst = hackbright.get_grades_by_github(github)
+
 
     html = render_template("student_info.html",
     						first=first,
     						last=last,
-    						github=github)
+    						github=github,
+    						title_grade=title_grade)
 
     return html
+
+@app.route('/test')
+def test(github):
+	github = 'jhacks'
+	first, last, github = hackbright.get_student_by_github(github)
+	lst = hackbright.get_grades_by_github(github)
+	print "hello"
 
 @app.route("/student-search")
 def get_student_form():
